@@ -1,0 +1,6 @@
+
+#ifndef FLAPPER_VERSION_H_INCLUDED_
+#define FLAPPER_VERSION_H_INCLUDED_
+
+
+#endif  

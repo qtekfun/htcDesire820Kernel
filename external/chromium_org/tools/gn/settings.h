@@ -1,0 +1,118 @@
+// Copyright (c) 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef TOOLS_GN_SETTINGS_H_
+#define TOOLS_GN_SETTINGS_H_
+
+#include "base/files/file_path.h"
+#include "tools/gn/build_settings.h"
+#include "tools/gn/import_manager.h"
+#include "tools/gn/output_file.h"
+#include "tools/gn/scope.h"
+#include "tools/gn/source_dir.h"
+#include "tools/gn/toolchain.h"
+
+class Settings {
+ public:
+  enum TargetOS {
+    UNKNOWN,
+    LINUX,
+    MAC,
+    WIN
+  };
+
+  
+  
+  
+  
+  Settings(const BuildSettings* build_settings,
+           const std::string& output_subdir_name);
+  ~Settings();
+
+  const BuildSettings* build_settings() const { return build_settings_; }
+
+  const Label& toolchain_label() const { return toolchain_label_; }
+  void set_toolchain_label(const Label& l) { toolchain_label_ = l; }
+
+  const Label& default_toolchain_label() const {
+    return default_toolchain_label_;
+  }
+  void set_default_toolchain_label(const Label& default_label) {
+    default_toolchain_label_ = default_label;
+  }
+
+  
+  bool is_default() const {
+    return toolchain_label_ == default_toolchain_label_;
+  }
+
+  bool IsMac() const { return target_os_ == MAC; }
+  bool IsLinux() const { return target_os_ == LINUX; }
+  bool IsWin() const { return target_os_ == WIN; }
+
+  TargetOS target_os() const { return target_os_; }
+  void set_target_os(TargetOS t) { target_os_ = t; }
+
+  const OutputFile& toolchain_output_subdir() const {
+    return toolchain_output_subdir_;
+  }
+  const SourceDir& toolchain_output_dir() const {
+    return toolchain_output_dir_;
+  }
+
+  
+  const SourceDir& toolchain_gen_dir() const {
+    return toolchain_gen_dir_;
+  }
+
+  
+  
+  
+  
+  
+  ImportManager& import_manager() const { return import_manager_; }
+
+  const Scope* base_config() const { return &base_config_; }
+  Scope* base_config() { return &base_config_; }
+
+  
+  
+  
+  
+  bool greedy_target_generation() const {
+    return greedy_target_generation_;
+  }
+  void set_greedy_target_generation(bool gtg) {
+    greedy_target_generation_ = gtg;
+  }
+
+ private:
+  const BuildSettings* build_settings_;
+
+  Label toolchain_label_;
+  Label default_toolchain_label_;
+
+  TargetOS target_os_;
+
+  mutable ImportManager import_manager_;
+
+  
+  
+  
+  
+  OutputFile toolchain_output_subdir_;
+
+  
+  SourceDir toolchain_output_dir_;
+
+  SourceDir toolchain_gen_dir_;
+
+  Scope base_config_;
+
+  bool greedy_target_generation_;
+
+  DISALLOW_COPY_AND_ASSIGN(Settings);
+};
+
+#endif  

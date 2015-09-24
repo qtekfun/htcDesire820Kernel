@@ -1,0 +1,36 @@
+// Copyright (c) 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CONTENT_BROWSER_INDEXED_DB_LEVELDB_LEVELDB_WRITE_BATCH_H_
+#define CONTENT_BROWSER_INDEXED_DB_LEVELDB_LEVELDB_WRITE_BATCH_H_
+
+#include "base/memory/scoped_ptr.h"
+#include "base/strings/string_piece.h"
+
+namespace leveldb {
+class WriteBatch;
+}
+
+namespace content {
+
+class LevelDBWriteBatch {
+ public:
+  static scoped_ptr<LevelDBWriteBatch> Create();
+  ~LevelDBWriteBatch();
+
+  void Put(const base::StringPiece& key, const base::StringPiece& value);
+  void Remove(const base::StringPiece& key);  
+                                              
+  void Clear();
+
+ private:
+  friend class LevelDBDatabase;
+  LevelDBWriteBatch();
+
+  scoped_ptr<leveldb::WriteBatch> write_batch_;
+};
+
+}  
+
+#endif  

@@ -1,0 +1,71 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef NET_SOCKET_BUFFERED_WRITE_STREAM_SOCKET_H_
+#define NET_SOCKET_BUFFERED_WRITE_STREAM_SOCKET_H_
+
+#include "base/basictypes.h"
+#include "base/memory/scoped_ptr.h"
+#include "base/memory/weak_ptr.h"
+#include "net/base/net_log.h"
+#include "net/socket/stream_socket.h"
+
+namespace base {
+class TimeDelta;
+}
+
+namespace net {
+
+class AddressList;
+class GrowableIOBuffer;
+class IPEndPoint;
+
+class NET_EXPORT_PRIVATE BufferedWriteStreamSocket : public StreamSocket {
+ public:
+  explicit BufferedWriteStreamSocket(scoped_ptr<StreamSocket> socket_to_wrap);
+  virtual ~BufferedWriteStreamSocket();
+
+  
+  virtual int Read(IOBuffer* buf, int buf_len,
+                   const CompletionCallback& callback) OVERRIDE;
+  virtual int Write(IOBuffer* buf, int buf_len,
+                    const CompletionCallback& callback) OVERRIDE;
+  virtual bool SetReceiveBufferSize(int32 size) OVERRIDE;
+  virtual bool SetSendBufferSize(int32 size) OVERRIDE;
+
+  
+  virtual int Connect(const CompletionCallback& callback) OVERRIDE;
+  virtual void Disconnect() OVERRIDE;
+  virtual bool IsConnected() const OVERRIDE;
+  virtual bool IsConnectedAndIdle() const OVERRIDE;
+  virtual int GetPeerAddress(IPEndPoint* address) const OVERRIDE;
+  virtual int GetLocalAddress(IPEndPoint* address) const OVERRIDE;
+  virtual const BoundNetLog& NetLog() const OVERRIDE;
+  virtual void SetSubresourceSpeculation() OVERRIDE;
+  virtual void SetOmniboxSpeculation() OVERRIDE;
+  virtual bool WasEverUsed() const OVERRIDE;
+  virtual bool UsingTCPFastOpen() const OVERRIDE;
+  virtual bool WasNpnNegotiated() const OVERRIDE;
+  virtual NextProto GetNegotiatedProtocol() const OVERRIDE;
+  virtual bool GetSSLInfo(SSLInfo* ssl_info) OVERRIDE;
+
+ private:
+  void DoDelayedWrite();
+  void OnIOComplete(int result);
+
+  scoped_ptr<StreamSocket> wrapped_socket_;
+  scoped_refptr<GrowableIOBuffer> io_buffer_;
+  scoped_refptr<GrowableIOBuffer> backup_buffer_;
+  bool callback_pending_;
+  bool wrapped_write_in_progress_;
+  int error_;
+
+  base::WeakPtrFactory<BufferedWriteStreamSocket> weak_factory_;
+
+  DISALLOW_COPY_AND_ASSIGN(BufferedWriteStreamSocket);
+};
+
+}  
+
+#endif  

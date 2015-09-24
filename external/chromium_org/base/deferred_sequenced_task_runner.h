@@ -1,0 +1,77 @@
+// Copyright (c) 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef BASE_DEFERRED_SEQUENCED_TASKRUNNER_H_
+#define BASE_DEFERRED_SEQUENCED_TASKRUNNER_H_
+
+#include <vector>
+
+#include "base/base_export.h"
+#include "base/basictypes.h"
+#include "base/callback.h"
+#include "base/compiler_specific.h"
+#include "base/memory/ref_counted.h"
+#include "base/sequenced_task_runner.h"
+#include "base/synchronization/lock.h"
+#include "base/time/time.h"
+#include "base/tracked_objects.h"
+
+namespace base {
+
+class BASE_EXPORT DeferredSequencedTaskRunner : public SequencedTaskRunner {
+ public:
+  explicit DeferredSequencedTaskRunner(
+      const scoped_refptr<SequencedTaskRunner>& target_runner);
+
+  
+  virtual bool PostDelayedTask(const tracked_objects::Location& from_here,
+                               const Closure& task,
+                               TimeDelta delay) OVERRIDE;
+  virtual bool RunsTasksOnCurrentThread() const OVERRIDE;
+
+  
+  virtual bool PostNonNestableDelayedTask(
+      const tracked_objects::Location& from_here,
+      const Closure& task,
+      TimeDelta delay) OVERRIDE;
+
+  
+  
+  
+  
+  void Start();
+
+ private:
+  struct DeferredTask  {
+    DeferredTask();
+    ~DeferredTask();
+
+    tracked_objects::Location posted_from;
+    Closure task;
+    
+    TimeDelta delay;
+    bool is_non_nestable;
+  };
+
+  virtual ~DeferredSequencedTaskRunner();
+
+  
+  void QueueDeferredTask(const tracked_objects::Location& from_here,
+                         const Closure& task,
+                         TimeDelta delay,
+                         bool is_non_nestable);
+
+  
+  mutable Lock lock_;
+
+  bool started_;
+  const scoped_refptr<SequencedTaskRunner> target_task_runner_;
+  std::vector<DeferredTask> deferred_tasks_queue_;
+
+  DISALLOW_COPY_AND_ASSIGN(DeferredSequencedTaskRunner);
+};
+
+}  
+
+#endif  

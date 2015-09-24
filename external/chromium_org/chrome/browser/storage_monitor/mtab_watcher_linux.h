@@ -1,0 +1,59 @@
+// Copyright (c) 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+
+#ifndef CHROME_BROWSER_STORAGE_MONITOR_MTAB_WATCHER_LINUX_H_
+#define CHROME_BROWSER_STORAGE_MONITOR_MTAB_WATCHER_LINUX_H_
+
+#if defined(OS_CHROMEOS)
+#error "ChromeOS does not use MtabWatcherLinux."
+#endif
+
+#include <map>
+
+#include "base/basictypes.h"
+#include "base/files/file_path.h"
+#include "base/files/file_path_watcher.h"
+#include "base/memory/weak_ptr.h"
+
+class MtabWatcherLinux {
+ public:
+  
+  
+  
+  typedef std::map<base::FilePath, base::FilePath> MountPointDeviceMap;
+
+  class Delegate {
+   public:
+    virtual ~Delegate() {}
+
+    
+    virtual void UpdateMtab(const MountPointDeviceMap& new_mtab) = 0;
+  };
+
+  MtabWatcherLinux(const base::FilePath& mtab_path,
+                   base::WeakPtr<Delegate> delegate);
+  ~MtabWatcherLinux();
+
+ private:
+  
+  void ReadMtab() const;
+
+  
+  void OnFilePathChanged(const base::FilePath& path, bool error);
+
+  
+  const base::FilePath mtab_path_;
+
+  
+  base::FilePathWatcher file_watcher_;
+
+  base::WeakPtr<Delegate> delegate_;
+
+  base::WeakPtrFactory<MtabWatcherLinux> weak_ptr_factory_;
+
+  DISALLOW_COPY_AND_ASSIGN(MtabWatcherLinux);
+};
+
+#endif  

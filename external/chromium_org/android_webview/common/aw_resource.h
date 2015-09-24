@@ -1,0 +1,20 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef ANDROID_WEBVIEW_COMMON_AW_RESOURCE_H_
+#define ANDROID_WEBVIEW_COMMON_AW_RESOURCE_H_
+
+#include <string>
+
+namespace android_webview {
+namespace AwResource {
+
+std::string GetLoadErrorPageContent();
+std::string GetNoDomainPageContent();
+std::string GetDefaultTextEncoding();
+
+}  
+}  
+
+#endif  

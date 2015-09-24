@@ -1,0 +1,26 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CHROME_BROWSER_SYNC_GLUE_CHROME_ENCRYPTOR_H_
+#define CHROME_BROWSER_SYNC_GLUE_CHROME_ENCRYPTOR_H_
+
+#include "base/compiler_specific.h"
+#include "sync/util/encryptor.h"
+
+namespace browser_sync {
+
+class ChromeEncryptor : public syncer::Encryptor {
+ public:
+  virtual ~ChromeEncryptor();
+
+  virtual bool EncryptString(const std::string& plaintext,
+                             std::string* ciphertext) OVERRIDE;
+
+  virtual bool DecryptString(const std::string& ciphertext,
+                             std::string* plaintext) OVERRIDE;
+};
+
+}  
+
+#endif  

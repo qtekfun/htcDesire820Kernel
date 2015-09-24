@@ -1,0 +1,205 @@
+
+#undef CRAY_STACKSEG_END
+
+#undef C_ALLOCA
+
+#undef ENABLE_NLS
+
+#undef HAVE_ALLOCA
+
+#undef HAVE_ALLOCA_H
+
+#undef HAVE_ARGZ_H
+
+#undef HAVE_ASPRINTF
+
+#undef HAVE_CFLOCALECOPYCURRENT
+
+#undef HAVE_CFPREFERENCESCOPYAPPVALUE
+
+#undef HAVE_DCGETTEXT
+
+#undef HAVE_DECL_FEOF_UNLOCKED
+
+#undef HAVE_DECL_FGETS_UNLOCKED
+
+#undef HAVE_DECL_GETC_UNLOCKED
+
+#undef HAVE_DECL__SNPRINTF
+
+#undef HAVE_DECL__SNWPRINTF
+
+#undef HAVE_DLFCN_H
+
+#define HAVE_FLOAT_H 1
+
+#undef HAVE_FWPRINTF
+
+#undef HAVE_GETCWD
+
+#undef HAVE_GETEGID
+
+#undef HAVE_GETEUID
+
+#undef HAVE_GETGID
+
+#undef HAVE_GETPAGESIZE
+
+#undef HAVE_GETTEXT
+
+#undef HAVE_GETUID
+
+#undef HAVE_ICONV
+
+#undef HAVE_INTMAX_T
+
+#define HAVE_INTTYPES_H 1
+
+#undef HAVE_INTTYPES_H_WITH_UINTMAX
+
+#undef HAVE_LANGINFO_CODESET
+
+#undef HAVE_LC_MESSAGES
+
+#undef HAVE_LIBINTL_H
+
+#define HAVE_LIMITS_H 1
+
+#undef HAVE_LOCALE_H
+
+#undef HAVE_LONG_DOUBLE
+
+#define HAVE_LONG_LONG 1
+
+#undef HAVE_MALLOC_H 
+#define HAVE_MALLOC_H 1
+
+#undef HAVE_MCHECK_H
+
+#define HAVE_MEMORY_H 1
+
+#define HAVE_MEMPCPY 1
+
+#define HAVE_MMAP 1
+
+#undef HAVE_MTRACE
+
+#define HAVE_MUNMAP 1
+
+#undef HAVE_NL_TYPES_H
+
+#define HAVE_POSIX_PRINTF 1
+
+#undef HAVE_PUTENV
+
+#undef HAVE_SETENV
+
+#undef HAVE_SETLOCALE
+
+#undef HAVE_SETREGID
+
+#define HAVE_SNPRINTF 1
+
+#define HAVE_STDDEF_H 1
+
+#define HAVE_STDINT_H 1
+
+#undef HAVE_STDINT_H_WITH_UINTMAX
+
+#define HAVE_STDLIB_H 1
+
+#undef HAVE_STPCPY
+
+#undef HAVE_STRCASECMP
+
+#undef HAVE_STRDUP
+
+#define HAVE_STRERROR 1
+
+#undef HAVE_STRINGS_H
+
+#undef HAVE_STRING_H
+
+#undef HAVE_STRTOUL
+
+#undef HAVE_SYS_PARAM_H
+
+#undef HAVE_SYS_STAT_H
+
+#undef HAVE_SYS_TYPES_H
+
+#undef HAVE_TSEARCH
+
+#undef HAVE_UINTMAX_T
+
+#define HAVE_UNISTD_H 1
+
+#undef HAVE_UNSIGNED_LONG_LONG
+
+#undef HAVE_WCHAR_T
+
+#undef HAVE_WCSLEN
+
+#undef HAVE_WINT_T
+
+#undef HAVE___ARGZ_COUNT
+
+#undef HAVE___ARGZ_NEXT
+
+#undef HAVE___ARGZ_STRINGIFY
+
+#undef HAVE___FSETLOCKING
+
+#undef HAVE___SECURE_GETENV
+
+#undef ICONV_CONST
+
+#undef INTDIV0_RAISES_SIGFPE
+
+#define PACKAGE "popt"
+
+#undef PACKAGE_BUGREPORT
+
+#undef PACKAGE_NAME
+
+#undef PACKAGE_STRING
+
+#undef PACKAGE_TARNAME
+
+#undef PACKAGE_VERSION
+
+#undef POPT_SOURCE_PATH
+
+#undef PRI_MACROS_BROKEN
+
+#undef PROTOTYPES
+
+#undef SIZE_MAX
+
+#undef STACK_DIRECTION
+
+#undef STDC_HEADERS
+
+#undef VERSION
+
+#undef _FILE_OFFSET_BITS
+
+#undef _LARGE_FILES
+
+#undef __PROTOTYPES
+
+#undef const
+
+#ifndef __cplusplus
+#undef inline
+#endif
+
+#undef off_t
+
+#undef ptrdiff_t
+
+#undef signed
+
+#undef size_t
+
+#undef uintmax_t

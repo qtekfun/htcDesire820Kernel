@@ -1,0 +1,72 @@
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#if defined (__GLIBC__) && defined(__LCLINT__)
+extern __const __int32_t *__ctype_tolower;
+extern __const __int32_t *__ctype_toupper;
+#endif
+
+#include <ctype.h>
+
+#include <errno.h>
+#include <fcntl.h>
+#include <limits.h>
+
+#if HAVE_MCHECK_H 
+#include <mcheck.h>
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
+
+#ifdef __NeXT
+#include <libc.h>
+#endif
+
+#if defined(__LCLINT__)
+ 
+ 
+void * alloca (size_t __size)
+	
+	;
+#endif
+
+ 
+#ifndef __GNUC__
+# if HAVE_ALLOCA_H
+#  include <alloca.h>
+# else
+#  ifdef _AIX
+#pragma alloca
+#  else
+#   ifndef alloca 
+char *alloca ();
+#   endif
+#  endif
+# endif
+#elif defined(__GNUC__) && defined(__STRICT_ANSI__)
+#define alloca __builtin_alloca
+#endif
+
+  
+char * xstrdup (const char *str)
+	;
+
+#if HAVE_MCHECK_H && defined(__GNUC__)
+#define	vmefail()	(fprintf(stderr, "virtual memory exhausted.\n"), exit(EXIT_FAILURE), NULL)
+#define xstrdup(_str)   (strcpy((malloc(strlen(_str)+1) ? : vmefail()), (_str)))
+#else
+#define	xstrdup(_str)	strdup(_str)
+#endif  
+
+#if HAVE___SECURE_GETENV && !defined(__LCLINT__)
+#define	getenv(_s)	__secure_getenv(_s)
+#endif
+
+#include "popt.h"

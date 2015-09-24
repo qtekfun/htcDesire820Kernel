@@ -1,0 +1,47 @@
+// Copyright (c) 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef TOOLS_GN_SCRIPT_VALUES_H_
+#define TOOLS_GN_SCRIPT_VALUES_H_
+
+#include <string>
+#include <vector>
+
+#include "base/basictypes.h"
+#include "tools/gn/source_file.h"
+
+class ScriptValues {
+ public:
+  ScriptValues();
+  ~ScriptValues();
+
+  
+  const SourceFile& script() const { return script_; }
+  void set_script(const SourceFile& s) { script_ = s; }
+
+  
+  std::vector<std::string>& args() { return args_; }
+  const std::vector<std::string>& args() const { return args_; }
+  void swap_in_args(std::vector<std::string>* a) { args_.swap(*a); }
+
+  
+  std::vector<SourceFile>& outputs() { return outputs_; }
+  const std::vector<SourceFile>& outputs() const { return outputs_; }
+  void swap_in_outputs(std::vector<SourceFile>* op) { outputs_.swap(*op); }
+
+  
+  const SourceFile& depfile() const { return depfile_; }
+  bool has_depfile() const { return !depfile_.is_null(); }
+  void set_depfile(const SourceFile& depfile) { depfile_ = depfile; }
+
+ private:
+  SourceFile script_;
+  std::vector<std::string> args_;
+  std::vector<SourceFile> outputs_;
+  SourceFile depfile_;
+
+  DISALLOW_COPY_AND_ASSIGN(ScriptValues);
+};
+
+#endif  

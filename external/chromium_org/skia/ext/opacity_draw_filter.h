@@ -1,0 +1,29 @@
+// Copyright 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef SKIA_EXT_OPACITY_DRAW_FILTER_H
+#define SKIA_EXT_OPACITY_DRAW_FILTER_H
+
+#include "base/values.h"
+#include "third_party/skia/include/core/SkDrawFilter.h"
+
+class SkPaint;
+
+namespace skia {
+
+class SK_API OpacityDrawFilter : public SkDrawFilter {
+ public:
+  OpacityDrawFilter(float opacity, bool disable_image_filtering);
+  virtual ~OpacityDrawFilter();
+  virtual bool filter(SkPaint* paint, SkDrawFilter::Type type) OVERRIDE;
+
+ private:
+  int alpha_;
+  bool disable_image_filtering_;
+};
+
+}  
+
+#endif  
+

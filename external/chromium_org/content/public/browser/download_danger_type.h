@@ -1,0 +1,52 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CONTENT_PUBLIC_BROWSER_DOWNLOAD_DANGER_TYPE_H_
+#define CONTENT_PUBLIC_BROWSER_DOWNLOAD_DANGER_TYPE_H_
+
+namespace content {
+
+enum DownloadDangerType {
+  
+  DOWNLOAD_DANGER_TYPE_NOT_DANGEROUS = 0,
+
+  
+  
+  DOWNLOAD_DANGER_TYPE_DANGEROUS_FILE,
+
+  
+  
+  DOWNLOAD_DANGER_TYPE_DANGEROUS_URL,
+
+  
+  DOWNLOAD_DANGER_TYPE_DANGEROUS_CONTENT,
+
+  
+  
+  DOWNLOAD_DANGER_TYPE_MAYBE_DANGEROUS_CONTENT,
+
+  
+  
+  DOWNLOAD_DANGER_TYPE_UNCOMMON_CONTENT,
+
+  
+  
+  DOWNLOAD_DANGER_TYPE_USER_VALIDATED,
+
+  
+  
+  
+  DOWNLOAD_DANGER_TYPE_DANGEROUS_HOST,
+
+  
+  DOWNLOAD_DANGER_TYPE_POTENTIALLY_UNWANTED,
+
+  
+  
+  DOWNLOAD_DANGER_TYPE_MAX
+};
+
+}
+
+#endif  

@@ -1,0 +1,52 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CONTENT_BROWSER_BROWSER_PROCESS_SUB_THREAD_H_
+#define CONTENT_BROWSER_BROWSER_PROCESS_SUB_THREAD_H_
+
+#include "base/basictypes.h"
+#include "content/browser/browser_thread_impl.h"
+#include "content/common/content_export.h"
+
+#if defined(OS_WIN)
+namespace base {
+namespace win {
+class ScopedCOMInitializer;
+}
+}
+#endif
+
+namespace content {
+class NotificationService;
+}
+
+namespace content {
+
+class CONTENT_EXPORT BrowserProcessSubThread : public BrowserThreadImpl {
+ public:
+  explicit BrowserProcessSubThread(BrowserThread::ID identifier);
+  virtual ~BrowserProcessSubThread();
+
+ protected:
+  virtual void Init() OVERRIDE;
+  virtual void CleanUp() OVERRIDE;
+
+ private:
+  
+  
+  void IOThreadPreCleanUp();
+
+#if defined (OS_WIN)
+  scoped_ptr<base::win::ScopedCOMInitializer> com_initializer_;
+#endif
+
+  
+  scoped_ptr<NotificationService> notification_service_;
+
+  DISALLOW_COPY_AND_ASSIGN(BrowserProcessSubThread);
+};
+
+}  
+
+#endif  

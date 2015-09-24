@@ -1,0 +1,47 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef UI_BASE_IME_TEXT_INPUT_TYPE_H_
+#define UI_BASE_IME_TEXT_INPUT_TYPE_H_
+
+namespace ui {
+
+enum TextInputType {
+  
+  TEXT_INPUT_TYPE_NONE,
+
+  
+  TEXT_INPUT_TYPE_TEXT,
+
+  
+  
+  TEXT_INPUT_TYPE_PASSWORD,
+
+  TEXT_INPUT_TYPE_SEARCH,
+  TEXT_INPUT_TYPE_EMAIL,
+  TEXT_INPUT_TYPE_NUMBER,
+  TEXT_INPUT_TYPE_TELEPHONE,
+  TEXT_INPUT_TYPE_URL,
+  TEXT_INPUT_TYPE_DATE,
+  TEXT_INPUT_TYPE_DATE_TIME,
+  TEXT_INPUT_TYPE_DATE_TIME_LOCAL,
+  TEXT_INPUT_TYPE_MONTH,
+  TEXT_INPUT_TYPE_TIME,
+  TEXT_INPUT_TYPE_WEEK,
+  TEXT_INPUT_TYPE_TEXT_AREA,
+
+  
+  TEXT_INPUT_TYPE_CONTENT_EDITABLE,
+
+  
+  
+  
+  TEXT_INPUT_TYPE_DATE_TIME_FIELD,
+
+  TEXT_INPUT_TYPE_MAX = TEXT_INPUT_TYPE_DATE_TIME_FIELD,
+};
+
+}  
+
+#endif  

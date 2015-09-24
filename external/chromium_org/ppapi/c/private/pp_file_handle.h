@@ -1,0 +1,26 @@
+/* Copyright (c) 2012 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+
+#ifndef PPAPI_C_PRIVATE_PP_FILE_HANDLE_H_
+#define PPAPI_C_PRIVATE_PP_FILE_HANDLE_H_
+
+#include "ppapi/c/pp_macros.h"
+
+
+
+
+#ifdef _WIN32
+#include<windows.h>
+typedef HANDLE PP_FileHandle;
+static const PP_FileHandle PP_kInvalidFileHandle = NULL;
+
+#else
+typedef int PP_FileHandle;
+static const PP_FileHandle PP_kInvalidFileHandle = -1;
+#endif
+
+#endif  
+

@@ -1,0 +1,116 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+
+#ifndef CONTENT_BROWSER_ANDROID_DOWNLOAD_CONTROLLER_ANDROID_IMPL_H_
+#define CONTENT_BROWSER_ANDROID_DOWNLOAD_CONTROLLER_ANDROID_IMPL_H_
+
+#include <string>
+
+#include "base/android/jni_helper.h"
+#include "base/android/scoped_java_ref.h"
+#include "base/callback.h"
+#include "base/memory/singleton.h"
+#include "content/public/browser/android/download_controller_android.h"
+#include "content/public/browser/download_item.h"
+#include "net/cookies/cookie_monster.h"
+#include "url/gurl.h"
+
+namespace net {
+class URLRequest;
+}
+
+namespace content {
+struct GlobalRequestID;
+class RenderViewHost;
+class WebContents;
+
+class DownloadControllerAndroidImpl : public DownloadControllerAndroid,
+                                      public DownloadItem::Observer {
+ public:
+  static DownloadControllerAndroidImpl* GetInstance();
+
+  static bool RegisterDownloadController(JNIEnv* env);
+
+  
+  void Init(JNIEnv* env, jobject obj);
+ private:
+  
+  struct DownloadInfoAndroid {
+    explicit DownloadInfoAndroid(net::URLRequest* request);
+    ~DownloadInfoAndroid();
+
+    
+    
+    GURL url;
+    
+    GURL original_url;
+    int64 total_bytes;
+    std::string content_disposition;
+    std::string original_mime_type;
+    std::string user_agent;
+    std::string cookie;
+    std::string referer;
+
+    WebContents* web_contents;
+    
+  };
+  struct JavaObject;
+  friend struct DefaultSingletonTraits<DownloadControllerAndroidImpl>;
+  DownloadControllerAndroidImpl();
+  virtual ~DownloadControllerAndroidImpl();
+
+  
+  virtual void CreateGETDownload(int render_process_id, int render_view_id,
+                                 int request_id) OVERRIDE;
+  virtual void OnDownloadStarted(DownloadItem* download_item) OVERRIDE;
+  virtual void StartContextMenuDownload(
+      const ContextMenuParams& params, WebContents* web_contents,
+      bool is_link) OVERRIDE;
+  virtual void DangerousDownloadValidated(
+      WebContents* web_contents, int download_id, bool accept) OVERRIDE;
+
+  
+  virtual void OnDownloadUpdated(DownloadItem* item) OVERRIDE;
+
+  typedef base::Callback<void(const DownloadInfoAndroid&)>
+      GetDownloadInfoCB;
+  void PrepareDownloadInfo(const GlobalRequestID& global_id,
+                           const GetDownloadInfoCB& callback);
+  void CheckPolicyAndLoadCookies(const DownloadInfoAndroid& info,
+                                 const GetDownloadInfoCB& callback,
+                                 const GlobalRequestID& global_id,
+                                 const net::CookieList& cookie_list);
+  void DoLoadCookies(const DownloadInfoAndroid& info,
+                     const GetDownloadInfoCB& callback,
+                     const GlobalRequestID& global_id);
+  void OnCookieResponse(DownloadInfoAndroid info,
+                        const GetDownloadInfoCB& callback,
+                        const std::string& cookie);
+  void StartDownloadOnUIThread(const GetDownloadInfoCB& callback,
+                               const DownloadInfoAndroid& info);
+  void StartAndroidDownload(int render_process_id,
+                            int render_view_id,
+                            const DownloadInfoAndroid& info);
+
+  
+  void OnDangerousDownload(DownloadItem *item);
+
+  base::android::ScopedJavaLocalRef<jobject> GetContentViewCoreFromWebContents(
+      WebContents* web_contents);
+
+  base::android::ScopedJavaLocalRef<jobject> GetContentView(
+      int render_process_id, int render_view_id);
+
+  
+  JavaObject* GetJavaObject();
+
+  JavaObject* java_object_;
+
+  DISALLOW_COPY_AND_ASSIGN(DownloadControllerAndroidImpl);
+};
+
+}  
+
+#endif  

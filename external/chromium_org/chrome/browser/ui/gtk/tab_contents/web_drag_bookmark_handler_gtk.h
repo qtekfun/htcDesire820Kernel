@@ -1,0 +1,49 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CHROME_BROWSER_UI_GTK_TAB_CONTENTS_WEB_DRAG_BOOKMARK_HANDLER_GTK_H_
+#define CHROME_BROWSER_UI_GTK_TAB_CONTENTS_WEB_DRAG_BOOKMARK_HANDLER_GTK_H_
+
+#include "base/compiler_specific.h"
+#include "chrome/browser/bookmarks/bookmark_node_data.h"
+#include "content/public/browser/web_drag_dest_delegate.h"
+
+class BookmarkTabHelper;
+
+namespace content {
+class WebContents;
+}
+
+class WebDragBookmarkHandlerGtk : public content::WebDragDestDelegate {
+ public:
+  WebDragBookmarkHandlerGtk();
+  virtual ~WebDragBookmarkHandlerGtk();
+
+  
+  virtual void DragInitialize(content::WebContents* contents) OVERRIDE;
+  virtual GdkAtom GetBookmarkTargetAtom() const OVERRIDE;
+  virtual void OnReceiveDataFromGtk(GtkSelectionData* data) OVERRIDE;
+  virtual void OnReceiveProcessedData(const GURL& url,
+                                      const base::string16& title) OVERRIDE;
+  virtual void OnDragOver() OVERRIDE;
+  virtual void OnDragEnter() OVERRIDE;
+  virtual void OnDrop() OVERRIDE;
+  virtual void OnDragLeave() OVERRIDE;
+
+ private:
+  
+  
+  
+  BookmarkTabHelper* bookmark_tab_helper_;
+
+  content::WebContents* web_contents_;
+
+  
+  
+  BookmarkNodeData bookmark_drag_data_;
+
+  DISALLOW_COPY_AND_ASSIGN(WebDragBookmarkHandlerGtk);
+};
+
+#endif  

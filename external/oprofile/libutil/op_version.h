@@ -1,0 +1,25 @@
+/**
+ * @file op_version.h
+ * output version string
+ *
+ * @remark Copyright 2003 OProfile authors
+ * @remark Read the file COPYING
+ *
+ * @author John Levon
+ * @author Philippe Elie
+ */
+
+#ifndef OP_VERSION_H
+#define OP_VERSION_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void show_version(char const * app_name);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif 

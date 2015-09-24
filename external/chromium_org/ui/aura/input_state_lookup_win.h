@@ -1,0 +1,28 @@
+// Copyright 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef UI_AURA_INPUT_STATE_LOOKUP_WIN_H_
+#define UI_AURA_INPUT_STATE_LOOKUP_WIN_H_
+
+#include "base/basictypes.h"
+#include "base/compiler_specific.h"
+#include "ui/aura/input_state_lookup.h"
+
+namespace aura {
+
+class AURA_EXPORT InputStateLookupWin : public InputStateLookup {
+ public:
+  InputStateLookupWin();
+  virtual ~InputStateLookupWin();
+
+  
+  virtual bool IsMouseButtonDown() const OVERRIDE;
+
+ private:
+  DISALLOW_COPY_AND_ASSIGN(InputStateLookupWin);
+};
+
+}  
+
+#endif  

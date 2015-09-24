@@ -1,0 +1,34 @@
+/* Copyright (c) 2011 The Chromium Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+
+#ifndef PPAPI_C_TEST_CGEN_RANGE_VERSIONS_H_
+#define PPAPI_C_TEST_CGEN_RANGE_VERSIONS_H_
+
+#include "ppapi/c/pp_macros.h"
+
+#define FOO_INTERFACE_0_0 "Foo;0.0"
+#define FOO_INTERFACE_1_0 "Foo;1.0"
+#define FOO_INTERFACE_2_0 "Foo;2.0"
+#define FOO_INTERFACE FOO_INTERFACE_2_0
+
+
+
+struct Foo_2_0 {
+  int32_t (*Bar)(int32_t x, int32_t y, int32_t z);
+};
+
+typedef struct Foo_2_0 Foo;
+
+struct Foo_0_0 {
+  int32_t (*Bar)(int32_t x);
+};
+
+struct Foo_1_0 {
+  int32_t (*Bar)(int32_t x, int32_t y);
+};
+
+#endif  
+

@@ -1,0 +1,38 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CHROME_BROWSER_UI_WEBUI_CHROMEOS_PROXY_SETTINGS_UI_H_
+#define CHROME_BROWSER_UI_WEBUI_CHROMEOS_PROXY_SETTINGS_UI_H_
+
+#include "chrome/browser/ui/webui/options/options_ui.h"
+#include "content/public/browser/web_ui_controller.h"
+
+namespace chromeos {
+
+namespace options {
+class CoreChromeOSOptionsHandler;
+class ProxyHandler;
+}
+
+class ProxySettingsUI : public content::WebUIController,
+                        public ::options::OptionsPageUIHandlerHost {
+ public:
+  explicit ProxySettingsUI(content::WebUI* web_ui);
+  virtual ~ProxySettingsUI();
+
+ private:
+  
+  virtual void InitializeHandlers() OVERRIDE;
+
+  bool initialized_handlers_;
+
+  options::ProxyHandler* proxy_handler_;  
+  options::CoreChromeOSOptionsHandler* core_handler_; 
+
+  DISALLOW_COPY_AND_ASSIGN(ProxySettingsUI);
+};
+
+}  
+
+#endif  

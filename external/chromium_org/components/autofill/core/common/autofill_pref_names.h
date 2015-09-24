@@ -1,0 +1,19 @@
+// Copyright 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef COMPONENTS_AUTOFILL_CORE_COMMON_AUTOFILL_PREF_NAMES_H_
+#define COMPONENTS_AUTOFILL_CORE_COMMON_AUTOFILL_PREF_NAMES_H_
+
+namespace autofill {
+namespace prefs {
+
+extern const char kAutofillAuxiliaryProfilesEnabled[];
+extern const char kAutofillEnabled[];
+extern const char kAutofillNegativeUploadRate[];
+extern const char kAutofillPositiveUploadRate[];
+
+}  
+}  
+
+#endif  

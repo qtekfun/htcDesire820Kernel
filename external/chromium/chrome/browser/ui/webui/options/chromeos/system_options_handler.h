@@ -1,0 +1,33 @@
+// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef CHROME_BROWSER_UI_WEBUI_OPTIONS_CHROMEOS_SYSTEM_OPTIONS_HANDLER_H_
+#define CHROME_BROWSER_UI_WEBUI_OPTIONS_CHROMEOS_SYSTEM_OPTIONS_HANDLER_H_
+#pragma once
+
+#include "chrome/browser/ui/webui/options/chromeos/cros_options_page_ui_handler.h"
+
+class DictionaryValue;
+
+class SystemOptionsHandler : public chromeos::CrosOptionsPageUIHandler {
+ public:
+  SystemOptionsHandler();
+  virtual ~SystemOptionsHandler();
+
+  
+  virtual void GetLocalizedValues(DictionaryValue* localized_strings);
+  virtual void Initialize();
+
+  virtual void RegisterMessages();
+
+  
+  
+  
+  void AccessibilityChangeCallback(const ListValue* args);
+
+ private:
+  DISALLOW_COPY_AND_ASSIGN(SystemOptionsHandler);
+};
+
+#endif  

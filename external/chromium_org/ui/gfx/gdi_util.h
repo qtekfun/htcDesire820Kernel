@@ -1,0 +1,45 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef UI_GFX_GDI_UTIL_H_
+#define UI_GFX_GDI_UTIL_H_
+
+#include <vector>
+#include <windows.h>
+
+#include "ui/gfx/gfx_export.h"
+#include "ui/gfx/rect.h"
+#include "ui/gfx/path.h"
+
+namespace gfx {
+
+GFX_EXPORT void CreateBitmapHeader(int width, int height,
+                                   BITMAPINFOHEADER* hdr);
+
+void CreateBitmapHeaderWithColorDepth(int width, int height, int color_depth,
+                                      BITMAPINFOHEADER* hdr);
+
+GFX_EXPORT void CreateBitmapV4Header(int width, int height,
+                                     BITMAPV4HEADER* hdr);
+
+void CreateMonochromeBitmapHeader(int width, int height, BITMAPINFOHEADER* hdr);
+
+GFX_EXPORT void SubtractRectanglesFromRegion(
+    HRGN hrgn,
+    const std::vector<gfx::Rect>& cutouts);
+
+GFX_EXPORT HRGN ConvertPathToHRGN(const gfx::Path& path);
+
+GFX_EXPORT double CalculatePageScale(HDC dc, int page_width, int page_height);
+
+GFX_EXPORT bool ScaleDC(HDC dc, double scale_factor);
+
+GFX_EXPORT void StretchDIBits(HDC hdc,
+                              int dest_x, int dest_y, int dest_w, int dest_h,
+                              int src_x, int src_y, int src_w, int src_h,
+                              void* pixels, const BITMAPINFO* bitmap_info);
+
+}  
+
+#endif  

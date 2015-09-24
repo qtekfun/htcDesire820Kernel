@@ -1,0 +1,24 @@
+// Copyright (c) 2011 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+
+#ifdef UNDEFINE_PROXIED_API
+#undef UNDEFINE_PROXIED_API
+#undef PROXIED_API
+#endif
+
+#ifdef UNDEFINE_UNPROXIED_API
+#undef UNDEFINE_UNPROXIED_API
+#undef UNPROXIED_API
+#endif
+
+#ifdef UNDEFINE_PROXIED_IFACE
+#undef UNDEFINE_PROXIED_IFACE
+#undef PROXIED_IFACE
+#endif
+
+#ifdef UNDEFINE_UNPROXIED_IFACE
+#undef UNDEFINE_UNPROXIED_IFACE
+#undef UNPROXIED_IFACE
+#endif

@@ -1,0 +1,33 @@
+// Copyright 2013 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef COMPONENTS_POLICY_CORE_COMMON_PREFERENCES_MOCK_MAC_H_
+#define COMPONENTS_POLICY_CORE_COMMON_PREFERENCES_MOCK_MAC_H_
+
+#include "base/mac/scoped_cftyperef.h"
+#include "components/policy/core/common/preferences_mac.h"
+#include "components/policy/policy_export.h"
+
+class POLICY_EXPORT MockPreferences : public MacPreferences {
+ public:
+  MockPreferences();
+  virtual ~MockPreferences();
+
+  virtual Boolean AppSynchronize(CFStringRef applicationID) OVERRIDE;
+
+  virtual CFPropertyListRef CopyAppValue(CFStringRef key,
+                                         CFStringRef applicationID) OVERRIDE;
+
+  virtual Boolean AppValueIsForced(CFStringRef key,
+                                   CFStringRef applicationID) OVERRIDE;
+
+  
+  void AddTestItem(CFStringRef key, CFPropertyListRef value, bool is_forced);
+
+ private:
+  base::ScopedCFTypeRef<CFMutableDictionaryRef> values_;
+  base::ScopedCFTypeRef<CFMutableSetRef> forced_;
+};
+
+#endif  

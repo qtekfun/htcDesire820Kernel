@@ -1,0 +1,54 @@
+// Copyright (c) 2012 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+#ifndef BASE_TASK_RUNNER_UTIL_H_
+#define BASE_TASK_RUNNER_UTIL_H_
+
+#include "base/bind.h"
+#include "base/bind_helpers.h"
+#include "base/callback_internal.h"
+#include "base/logging.h"
+#include "base/task_runner.h"
+
+namespace base {
+
+namespace internal {
+
+template <typename ReturnType>
+void ReturnAsParamAdapter(const Callback<ReturnType(void)>& func,
+                          ReturnType* result) {
+  *result = func.Run();
+}
+
+template <typename TaskReturnType, typename ReplyArgType>
+void ReplyAdapter(const Callback<void(ReplyArgType)>& callback,
+                  TaskReturnType* result) {
+  
+  
+  
+  
+  if (!callback.is_null())
+    callback.Run(CallbackForward(*result));
+}
+
+}  
+
+template <typename TaskReturnType, typename ReplyArgType>
+bool PostTaskAndReplyWithResult(
+    TaskRunner* task_runner,
+    const tracked_objects::Location& from_here,
+    const Callback<TaskReturnType(void)>& task,
+    const Callback<void(ReplyArgType)>& reply) {
+  TaskReturnType* result = new TaskReturnType();
+  return task_runner->PostTaskAndReply(
+      from_here,
+      base::Bind(&internal::ReturnAsParamAdapter<TaskReturnType>, task,
+                 result),
+      base::Bind(&internal::ReplyAdapter<TaskReturnType, ReplyArgType>, reply,
+                 base::Owned(result)));
+}
+
+}  
+
+#endif  

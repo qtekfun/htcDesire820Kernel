@@ -1,0 +1,14 @@
+#undef PACKAGE
+#undef VERSION
+#undef HAVE_LIBZ
+#undef HAVE_LIBM
+#undef HAVE_ISINF
+#undef HAVE_ISNAN
+#undef HAVE_LIBHISTORY
+#undef HAVE_LIBREADLINE
+#undef HAVE_LIBPTHREAD
+#undef HAVE_PTHREAD_H
+
+#undef SUPPORT_IP6
+
+#undef HAVE_GETADDRINFO
